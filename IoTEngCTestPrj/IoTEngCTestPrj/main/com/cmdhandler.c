@@ -41,13 +41,17 @@ void  CommandHandler_handle(uint16_t cmdid, uint8_t* payloadp)
 		return;
 	}
 	///////////////////////////////////////////////////////////
-	for (i = 1; i < cmd_handle_params.items_count; i++)
+	for (i = 1; i <= cmd_handle_params.items_count; i++)
 	{
 		cmd_handle_params.curr_item = i;   
 		cmd_process_array[cmdid](payloadp, i, _item_responce_buff + items_len_accumulator);
+		if (cmd_handle_params.curr_item_length != 0)
+		{
+			Communication_appendResponse(_item_responce_buff + items_len_accumulator, cmd_handle_params.curr_item_length);
+		}
 		items_len_accumulator += cmd_handle_params.curr_item_length;
 		
-		if ((items_len_accumulator + cmd_handle_params.next_item_length) >= SEND_MAX_BUFF_LEN)
+		if ((((items_len_accumulator + cmd_handle_params.next_item_length) >= SEND_MAX_BUFF_LEN) || (i == cmd_handle_params.items_count)) && (items_len_accumulator!= 0))
 		{
 			uint8_t * _enc_buffer = malloc(items_len_accumulator); 
 			if (_enc_buffer == NULL) 
@@ -89,6 +93,7 @@ void cmd_000_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 	case CMD_ID_000_ITEMS:
 		cmd_handle_params.curr_item_length = CMD_ITEM_FIX_LEN;
 		cmd_handle_params.next_item_length = 0;
+
 		break;
 		
 	default:
@@ -96,6 +101,9 @@ void cmd_000_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 		cmd_handle_params.next_item_length = CMD_ITEM_FIX_LEN;
 		break;
 	}
+	// if we need some process on payloadp and fill the responseDatap base on, we should call Communication_appendResponse here 
+	// if not, better call it once inside CommandHandler_handle, this way is more optilal.
+	//Communication_appendResponse(responseDatap, cmd_handle_params.curr_item_length);
 }
 void cmd_001_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap)
 {
@@ -124,6 +132,7 @@ void cmd_001_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 		cmd_handle_params.next_item_length = CMD_ITEM_FIX_LEN;
 		break;
 	}
+	//Communication_appendResponse(responseDatap, cmd_handle_params.curr_item_length);
 }
 void cmd_002_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap)
 {
@@ -152,6 +161,7 @@ void cmd_002_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 		cmd_handle_params.next_item_length = CMD_ITEM_FIX_LEN;
 		break;
 	}
+	//Communication_appendResponse(responseDatap, cmd_handle_params.curr_item_length);
 }
 void cmd_003_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap)
 {
@@ -180,6 +190,7 @@ void cmd_003_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 		cmd_handle_params.next_item_length = CMD_ITEM_FIX_LEN;
 		break;
 	}
+	//Communication_appendResponse(responseDatap, cmd_handle_params.curr_item_length);
 }
 void cmd_004_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap)
 {
@@ -208,6 +219,7 @@ void cmd_004_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 		cmd_handle_params.next_item_length = CMD_ITEM_FIX_LEN;
 		break;
 	}
+	//Communication_appendResponse(responseDatap, cmd_handle_params.curr_item_length);
 }
 void cmd_005_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap)
 {
@@ -236,6 +248,7 @@ void cmd_005_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 		cmd_handle_params.next_item_length = CMD_ITEM_FIX_LEN;
 		break;
 	}
+	//Communication_appendResponse(responseDatap, cmd_handle_params.curr_item_length);
 }
 void cmd_006_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap)
 {
@@ -264,6 +277,7 @@ void cmd_006_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 		cmd_handle_params.next_item_length = CMD_ITEM_FIX_LEN;
 		break;
 	}
+	//Communication_appendResponse(responseDatap, cmd_handle_params.curr_item_length);
 }
 void cmd_007_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap)
 {
@@ -292,6 +306,7 @@ void cmd_007_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 		cmd_handle_params.next_item_length = CMD_ITEM_FIX_LEN;
 		break;
 	}
+	//Communication_appendResponse(responseDatap, cmd_handle_params.curr_item_length);
 }
 void cmd_008_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap)
 {
@@ -320,6 +335,7 @@ void cmd_008_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 		cmd_handle_params.next_item_length = CMD_ITEM_FIX_LEN;
 		break;
 	}
+	//Communication_appendResponse(responseDatap, cmd_handle_params.curr_item_length);
 }
 void cmd_009_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap)
 {
@@ -348,5 +364,6 @@ void cmd_009_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 		cmd_handle_params.next_item_length = CMD_ITEM_FIX_LEN;
 		break;
 	}
+	//Communication_appendResponse(responseDatap, cmd_handle_params.curr_item_length);
 }
 

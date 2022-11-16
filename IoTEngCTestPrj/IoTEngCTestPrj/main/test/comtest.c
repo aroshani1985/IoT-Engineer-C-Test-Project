@@ -219,3 +219,31 @@ void Test_04_Communication_onDataReceived_s1()
 		TestComm: CMD[9], ItemCount: 1009
 	 */
 }
+
+void Test_05_Communication_onDataReceived_s2_10_items()
+{
+	int i = 0;
+	int frame_len = 64;
+	int payload_len = 32;
+	uint8_t pkt[frame_len];
+	pkt[0] = 0xAA;
+	pkt[1] = 0x00;
+	pkt[2] = 0x00;
+	pkt[3] = payload_len;
+	pkt[5] = 100;
+	init_receive_process_flags(false);
+
+	Communication_onDataReceived(pkt, frame_len);
+	ESP_LOGI(TAG_TEST_COM, "CMD[%d], ItemCount: %d\n", i, cmd_handle_params.items_count);
+	free_receive_resources();
+	
+	/*
+	 Send fcn: Communication_openResponse
+     Send fcn: Send result: A0 01 0A A0 02 0A A0 03 0A A0 04
+     Send fcn: Send result: 0A A0 05 0A A0 06 0A A0 07 0A A0
+     Send fcn: Send result: 08 0A A0 09 0A A0 0A 0A 
+     Send fcn: Send result: 0D 0A 
+     Send fcn: Communication_closeResponse
+     TestComm: CMD[0], ItemCount: 10
+	 */	
+}

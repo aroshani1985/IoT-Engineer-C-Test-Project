@@ -23,6 +23,8 @@ void app_main(void)
 	/////////////////////////////// Test Communication_onDataReceived Step 1
 	//Test_04_Communication_onDataReceived_s1();
 	//////////////////////////////////////
+	Test_05_Communication_onDataReceived_s2_10_items();
+	//////////////////////////////////////////////
     configure_led();
     while (1) 
     {
