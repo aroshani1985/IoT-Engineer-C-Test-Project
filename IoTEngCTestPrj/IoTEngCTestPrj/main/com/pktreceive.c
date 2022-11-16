@@ -3,6 +3,7 @@
 #include "pktreceive.h"
 #include "pktformat.h"
 #include "encdec.h"
+#include "cmdhandler.h"
 
 
 struct receive_packet_flags rec_pkt_flags;
@@ -38,7 +39,7 @@ void Communication_onDataReceived(uint8_t* packet, uint16_t lenght)
 	uint8_t* _decrypt_buffer = malloc(lenght); 
 	if (_decrypt_buffer == NULL) 
 	{	
-		rec_pkt_flags.err_code = ERR_OUT_OF_MEM;
+		rec_pkt_flags.err_code = ERR_OUT_OF_MEM1;
 		rec_pkt_flags.block_rec = false;   // resume receive.
 		return;
 	}
@@ -52,7 +53,9 @@ void Communication_onDataReceived(uint8_t* packet, uint16_t lenght)
 		free(_decrypt_buffer);
 		return;
 	}
-	///////////////////////////////////////
+	///////////////////////////////////////////// call command handler, consider watchdog feedinf here
+	CommandHandler_handle(rec_pkt_params.cmd, rec_pkt_params.payloadp);
+	////////////////////////////////////////////////
 	rec_pkt_flags.status = true;   
 	rec_pkt_flags.block_rec = false; // resume receive.
 	/////////////////////////////////if you want to access this memory outside of this function, dont free here

@@ -24,9 +24,10 @@
 
 #define ERR_NO_ERR           0 // No error
 #define ERR_INV_FRAME        1 // invalid frame
-#define ERR_OUT_OF_MEM       2 // cant aquire memory from system 
+#define ERR_OUT_OF_MEM1      2 // cant aquire memory from system in receive function  
 #define ERR_PKT_INV_LEN      3 // Invalid lenght of packet
 #define ERR_PKT_INV_START    4 // invalid start byte for packet
+#define ERR_OUT_OF_MEM2      5 // cant aquire memory from system in cmd handler
 
 // hold packet parameters
 struct rec_packet_params

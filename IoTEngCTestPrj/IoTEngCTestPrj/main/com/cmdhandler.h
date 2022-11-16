@@ -48,6 +48,8 @@ typedef void cmd_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseD
 // array of functions, each functions related to one command
 extern cmd_process *cmd_process_array[];
 
+void  CommandHandler_handle(uint16_t cmdid, uint8_t* payloadp);
+
 // implementation of each command process function
 void cmd_000_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap);
 void cmd_001_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap);

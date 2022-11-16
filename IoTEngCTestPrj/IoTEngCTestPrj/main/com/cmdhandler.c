@@ -1,4 +1,7 @@
 #include "cmdhandler.h"
+#include "pktsend.h"
+#include "pktformat.h"
+#include "pktreceive.h"
 
 // container for each command parameters
 struct command_handle_params cmd_handle_params;
@@ -16,6 +19,27 @@ cmd_process *cmd_process_array[CMD_COUNT] = {
 	cmd_008_process,
     cmd_009_process
 };
+
+
+void  CommandHandler_handle(uint16_t cmdid, uint8_t* payloadp)
+{
+	///////////////////////////////////////// get the items of the current command
+	cmd_process_array[cmdid](NULL, 0, NULL);
+	if (cmd_handle_params.items_count == 0)
+		return;
+	////////////////////////////////////////////////////////
+	Communication_openResponse();
+	////////////////////////////////////////////////////
+	uint8_t * _item_responce_buff = malloc(SEND_MAX_BUFF_LEN); 
+	if (_item_responce_buff == NULL) 
+	{	
+		rec_pkt_flags.err_code = ERR_OUT_OF_MEM2;
+		return;
+	}
+	///////////////////////////////////////////////////////////////
+	free(_item_responce_buff);	
+	Communication_closeResponse();
+}
 
 // implementation of each command process function
 void cmd_000_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap)

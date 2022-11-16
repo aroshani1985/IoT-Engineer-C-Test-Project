@@ -19,7 +19,7 @@ void app_main(void)
 	///////////////////////// Test packrt format functions
 	//Test_02_packet_format();
     ////////////////////////////// Test function dispacher
-	Test_03_fcn_dispacher();
+	//Test_03_fcn_dispacher();
 	///////////////////////////////////////////////////////
     configure_led();
     while (1) 

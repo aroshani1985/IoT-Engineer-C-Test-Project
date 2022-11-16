@@ -2,6 +2,7 @@
 #define _PKTRECEIVE_H
 
 #include <stdio.h>
+#include <stdbool.h>
 
 // receive processflags
 struct receive_packet_flags

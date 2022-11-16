@@ -101,8 +101,8 @@ void Test_02_packet_format()
 			ESP_LOGI(TAG_TEST_COM, "ERR_INV_FRAME");
 			break;
 			
-		case ERR_OUT_OF_MEM:
-			ESP_LOGI(TAG_TEST_COM, "ERR_OUT_OF_MEM");
+		case ERR_OUT_OF_MEM1:
+			ESP_LOGI(TAG_TEST_COM, "ERR_OUT_OF_MEM1");
 			break;
 			
 		case ERR_PKT_INV_LEN:
@@ -111,6 +111,10 @@ void Test_02_packet_format()
 			
 		case ERR_PKT_INV_START:
 			ESP_LOGI(TAG_TEST_COM, "ERR_PKT_INV_START");
+			break;
+			
+		case ERR_OUT_OF_MEM2:
+			ESP_LOGI(TAG_TEST_COM, "ERR_OUT_OF_MEM2");
 			break;
 			
 		default:
