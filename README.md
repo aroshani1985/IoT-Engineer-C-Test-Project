@@ -10,13 +10,13 @@ Secure communucation between two node based on request and reply
   5) Maximum packet length is limmited to 204 bytes
 
 # Protocol implementation files 
-  1) path is: main/com folder
-  2) encdec.c/h files are used for encryption and decription
-  3) pktformat.c/h files are used packet format definition 
+  1) path is: [main/com](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/) folder
+  2) [encdec.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/encdec.c) files are used for encryption and decription
+  3) [pktformat.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/pktformat.c) files are used packet format definition 
   
 
 
   # Protocol test files 
-  1) path is: main/test folder
-  2) comtest.c/h files are used for testing communication protocol implemented functions
+  1) path is: [main/test](/IoTEngCTestPrj/IoTEngCTestPrj/main/test/) folder
+  2) [comtest.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/test/comtest.c) files are used for testing communication protocol implemented functions
  
