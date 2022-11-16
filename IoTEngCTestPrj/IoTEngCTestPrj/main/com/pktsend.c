@@ -1,6 +1,7 @@
 #include "pktsend.h"
 #include "esp_log.h"
 #include "cmdhandler.h"
+#include "pktformat.h"
 
 //just simple implementation for test purposes
 void Communication_openResponse()
@@ -32,5 +33,13 @@ void Communication_sendData(uint8_t* data, uint16_t length)
 	}
 	if(idx < 32 && idx!= 0)
 	   ESP_LOGI("Send fcn", "Send result: %s", buff);
+}
+
+//just simple implementation for test purposes
+void Communication_appendResponse(uint8_t* data, uint16_t  length)
+{
+	uint16_t i;
+	for (i = 0; i < length; i++)
+		data[i] = cmd_handle_params.curr_item;
 }
 

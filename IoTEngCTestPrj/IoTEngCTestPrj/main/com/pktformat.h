@@ -28,6 +28,7 @@
 #define ERR_PKT_INV_LEN      3 // Invalid lenght of packet
 #define ERR_PKT_INV_START    4 // invalid start byte for packet
 #define ERR_OUT_OF_MEM2      5 // cant aquire memory from system in cmd handler
+#define ERR_OUT_OF_MEM3      6 // cant aquire memory from system in responce encription 
 
 // hold packet parameters
 struct rec_packet_params

@@ -34,7 +34,10 @@
 // container for each command parameters
 struct command_handle_params
 {
+	uint16_t curr_item;   // for test purposes
 	uint16_t items_count; // number of items of each command
+	uint16_t curr_item_length; // length of current item
+	uint16_t next_item_length; // length of next item
 };
 extern struct command_handle_params cmd_handle_params;
 
