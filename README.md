@@ -2,11 +2,12 @@
 Secure communucation between two node based on request and reply 
 
 # Protocol implementation files 
-  -path is: main/com folder
-  -encdec.c/h files are used for encryption and decription
+  1) path is: main/com folder
+  2) encdec.c/h files are used for encryption and decription
+  
 
 
   # Protocol test files 
-  -path is: main/test folder
-  -comtest.c/h files are used for testing communication protocol implemented functions
+  1) path is: main/test folder
+  2) comtest.c/h files are used for testing communication protocol implemented functions
  
