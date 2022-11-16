@@ -31,13 +31,24 @@
 
 #define CMD_ITEM_FIX_LEN          3
 
+// container for each command parameters
 struct command_handle_params
 {
-	uint16_t items_count;
+	uint16_t items_count; // number of items of each command
 };
 extern struct command_handle_params cmd_handle_params;
+
+// command process function template 
+// payloadp: is a pointer to related payload data in the heap
+// ItemIdx: item index is related to different items of one command, 
+// ItemIdx =0, returns item count of each command
+// responseDatap: pointer to the responce buffer 
 typedef void cmd_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap);
 
+// array of functions, each functions related to one command
+extern cmd_process *cmd_process_array[];
+
+// implementation of each command process function
 void cmd_000_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap);
 void cmd_001_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap);
 void cmd_002_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap);
@@ -48,6 +59,5 @@ void cmd_006_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap
 void cmd_007_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap);
 void cmd_008_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap);
 void cmd_009_process(uint8_t* payloadp, uint16_t ItemIdx, uint8_t* responseDatap);
-
 
 #endif

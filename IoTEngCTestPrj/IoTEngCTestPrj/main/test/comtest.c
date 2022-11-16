@@ -3,6 +3,7 @@
 #include "encdec.h"
 #include "pktformat.h"
 #include "pktreceive.h"
+#include "cmdhandler.h"
 
 
 static const char *TAG_TEST_COM = "TestComm";
@@ -125,4 +126,28 @@ void Test_02_packet_format()
       Payload len: 20 
       D[0] ... D[4]: 10 11 12 13 14.[0m
 	 */
+}
+
+void Test_03_fcn_dispacher()
+{
+	int i = 0;
+	
+	for (i = 0; i < CMD_COUNT; i++)
+	{
+		cmd_process_array[i](NULL, 0, NULL);
+		ESP_LOGI(TAG_TEST_COM, "CMD[%d], ItemCount: %d", i, cmd_handle_params.items_count);
+	}
+	/////////////////////////////////////////////output
+	/*
+	TestComm : CMD[0], ItemCount : 10
+	TestComm : CMD[1], ItemCount : 1001
+	TestComm : CMD[2], ItemCount : 1002
+	TestComm : CMD[3], ItemCount : 1003
+	TestComm : CMD[4], ItemCount : 1004
+	TestComm : CMD[5], ItemCount : 1005
+	TestComm : CMD[6], ItemCount : 1006
+	TestComm : CMD[7], ItemCount : 1007
+	TestComm : CMD[8], ItemCount : 1008
+	TestComm : CMD[9], ItemCount : 1009
+	*/
 }

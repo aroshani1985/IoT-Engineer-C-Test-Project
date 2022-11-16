@@ -14,11 +14,13 @@ static uint8_t s_led_state = 0;
 
 void app_main(void)
 {
-	//////////////////////test encryption and decription wrapper 
+	////////////////////// Test encryption and decription wrapper 
 	//Test_01_enc_dec_fcn();
-	///////////////////////// test packrt format functions
+	///////////////////////// Test packrt format functions
 	//Test_02_packet_format();
-    //////////////////////////////
+    ////////////////////////////// Test function dispacher
+	Test_03_fcn_dispacher();
+	///////////////////////////////////////////////////////
     configure_led();
     while (1) 
     {
