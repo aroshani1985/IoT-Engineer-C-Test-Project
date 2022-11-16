@@ -2,14 +2,22 @@
 #define _PKTFORMAT_H
 
 #include <stdio.h>
-
-//packet format [0xAA] [CMD_H]  [CMD_L] [Payload_Len]  [Payload .... ]
-
+/*
+  1) Frame format: 
+      [Start] [CMD_H]  [CMD_L] [Payload_Len]  [Payload .... ][EoF-1][EoF-2]
+      
+  2) Start byte is 0xAA (one byte)
+  3) Command id is two bytes.
+  4) Maximum payload is 200 bytes 
+  5) Maximum packet length is limmited to 206 bytes
+  6) End of frame indicator are two bytes [\r][\n]
+*/
 #define FRAME_MAX_LEN        512
 
 #define PACKET_HEADER_LEN    4 // start + cmd_h + cmd_l + len
 #define PAYLOAD_MAX_LEN      200
-#define PACKET_MAX_LEN       (PAYLOAD_MAX_LEN + PACKET_HEADER_LEN)
+#define PACKET_FOOTER_LEN    2
+#define PACKET_MAX_LEN       (PAYLOAD_MAX_LEN + PACKET_HEADER_LEN + PACKET_FOOTER_LEN)
 #define PACKET_START         0xAA
 
 #define ERR_NO_ERR           0 // No error
