@@ -8,7 +8,7 @@ Secure communucation between two node based on request and reply
   3) Command id is two bytes.
   4) Maximum payload is 200 bytes 
   5) Maximum packet length is limmited to 206 bytes
-  6) End of frame indicator are two bytes [\r][\n]
+  6) End of frame indicators are two bytes [\r][\n]
 
 # Protocol implementation files 
   1) path is: [main/com](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/) folder

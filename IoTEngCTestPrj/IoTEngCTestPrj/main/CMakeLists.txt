@@ -7,4 +7,5 @@ idf_component_register(
                     	com/pktformat.c
                     	com/pktreceive.c
                     	com/cmdhandler.c
+                    	com/pktsend.c
                     INCLUDE_DIRS "." gpio test com)
