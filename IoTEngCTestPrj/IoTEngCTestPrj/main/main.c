@@ -11,7 +11,6 @@ static const char *TAG = "IoTEngCTestPrj";
 static uint8_t s_led_state = 0;
 
 
-
 void app_main(void)
 {
     configure_led();
