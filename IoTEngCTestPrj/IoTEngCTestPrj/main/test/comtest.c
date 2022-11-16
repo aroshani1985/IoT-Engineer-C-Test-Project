@@ -155,3 +155,67 @@ void Test_03_fcn_dispacher()
 	TestComm : CMD[9], ItemCount : 1009
 	*/
 }
+
+void Test_04_Communication_onDataReceived_s1()
+{
+	int i = 0;
+	int frame_len = 64;
+	int payload_len = 32;
+	uint8_t pkt[frame_len];
+	pkt[0] = 0xAA;
+	pkt[1] = 0x00;
+	pkt[2] = 0x01;
+	pkt[3] = payload_len;
+	pkt[5] = 100;
+	init_receive_process_flags(false);
+	for (i = 0; i < CMD_COUNT; i++)
+	{
+		pkt[2] = i; //set cmd
+		
+		Communication_onDataReceived(pkt, frame_len);
+		ESP_LOGI(TAG_TEST_COM, "CMD[%d], ItemCount: %d\n", i, cmd_handle_params.items_count);
+		free_receive_resources();
+	}
+	
+	/* Output 
+		Send fcn: Communication_openResponse
+		Send fcn: Communication_closeResponse
+		TestComm: CMD[0], ItemCount: 10
+     
+		Send fcn: Communication_openResponse
+		Send fcn: Communication_closeResponse
+		TestComm: CMD[1], ItemCount: 1001
+
+		Send fcn: Communication_openResponse
+		Send fcn: Communication_closeResponse
+		TestComm: CMD[2], ItemCount: 1002
+
+		Send fcn: Communication_openResponse
+		Send fcn: Communication_closeResponse
+		TestComm: CMD[3], ItemCount: 1003
+
+		Send fcn: Communication_openResponse
+		Send fcn: Communication_closeResponse
+		TestComm: CMD[4], ItemCount: 1004.[0m
+
+		Send fcn: Communication_openResponse
+		Send fcn: Communication_closeResponse
+		TestComm: CMD[5], ItemCount: 1005.
+
+		Send fcn: Communication_openResponse
+		Send fcn: Communication_closeResponse
+		TestComm: CMD[6], ItemCount: 1006
+
+		Send fcn: Communication_openResponse
+		Send fcn: Communication_closeResponse
+		TestComm: CMD[7], ItemCount: 1007
+
+		Send fcn: Communication_openResponse
+		Send fcn: Communication_closeResponse
+		TestComm: CMD[8], ItemCount: 1008
+
+		Send fcn: Communication_openResponse
+		Send fcn: Communication_closeResponse
+		TestComm: CMD[9], ItemCount: 1009
+	 */
+}

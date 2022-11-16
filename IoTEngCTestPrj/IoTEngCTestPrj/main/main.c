@@ -20,7 +20,9 @@ void app_main(void)
 	//Test_02_packet_format();
     ////////////////////////////// Test function dispacher
 	//Test_03_fcn_dispacher();
-	///////////////////////////////////////////////////////
+	/////////////////////////////// Test Communication_onDataReceived Step 1
+	Test_04_Communication_onDataReceived_s1();
+	//////////////////////////////////////
     configure_led();
     while (1) 
     {
