@@ -1,7 +1,6 @@
 #include "encdec.h"
 #include "string.h"
 
-
 //wrapper for original ebcrypt and decrypt function to support any length
 void encrypt_decrypt_packet(uint8_t* input, uint16_t length, uint8_t* output, bool is_decrypt)
 {
@@ -25,8 +24,6 @@ void encrypt_decrypt_packet(uint8_t* input, uint16_t length, uint8_t* output, bo
 			encrypt(input + pkt_full_segments*ENC_DEC_BUFF_LIMIT, pkt_last_segment_len, output + pkt_full_segments*ENC_DEC_BUFF_LIMIT);
 	}
 }
-
-
 
 void encrypt(uint8_t* input, uint8_t length, uint8_t* output)
 {

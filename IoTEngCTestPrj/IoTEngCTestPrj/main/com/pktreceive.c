@@ -5,7 +5,6 @@
 #include "encdec.h"
 #include "cmdhandler.h"
 
-
 struct receive_packet_flags rec_pkt_flags;
 
 // init receive flags before start receive. 
