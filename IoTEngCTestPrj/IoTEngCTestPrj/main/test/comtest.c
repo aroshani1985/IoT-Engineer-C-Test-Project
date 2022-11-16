@@ -220,21 +220,21 @@ void Test_04_Communication_onDataReceived_s1()
 	 */
 }
 
-void Test_05_Communication_onDataReceived_s2_10_items()
+void Test_05_Communication_onDataReceived_s2_10_items(uint16_t CMD_ID)
 {
 	int i = 0;
 	int frame_len = 64;
 	int payload_len = 32;
 	uint8_t pkt[frame_len];
 	pkt[0] = 0xAA;
-	pkt[1] = 0x00;
-	pkt[2] = 0x00;
+	pkt[1] = CMD_ID >> 8;;
+	pkt[2] = CMD_ID;
 	pkt[3] = payload_len;
 	pkt[5] = 100;
 	init_receive_process_flags(false);
 
 	Communication_onDataReceived(pkt, frame_len);
-	ESP_LOGI(TAG_TEST_COM, "CMD[%d], ItemCount: %d\n", i, cmd_handle_params.items_count);
+	ESP_LOGI(TAG_TEST_COM, "CMD[0x%04x], ItemCount: %d\n", CMD_ID, cmd_handle_params.items_count);
 	free_receive_resources();
 	
 	/*
@@ -246,4 +246,18 @@ void Test_05_Communication_onDataReceived_s2_10_items()
      Send fcn: Communication_closeResponse
      TestComm: CMD[0], ItemCount: 10
 	 */	
+	
+     /*  output for 20 item, with header and footer
+	 Send fcn: Communication_openResponse
+     Send fcn: Send result: AA 00 01 00
+     Send fcn: Send result: A0 01 0A A0 02 0A A0 03 0A A0 04
+     Send fcn: Send result: 0A A0 05 0A A0 06 0A A0 07 0A A0
+     Send fcn: Send result: 08 0A A0 09 0A A0 0A 0A A0 0B 0A
+     Send fcn: Send result: A0 0C 0A A0 0D 0A A0 0E 0A A0 0F
+     Send fcn: Send result: 0A A0 10 0A A0 11 0A A0 12 0A A0
+     Send fcn: Send result: 13 0A A0 14 0A 
+     Send fcn: Send result: 0D 0A 
+     Send fcn: Communication_closeResponse
+     TestComm: CMD[0x0001], ItemCount: 20
+	 */
 }

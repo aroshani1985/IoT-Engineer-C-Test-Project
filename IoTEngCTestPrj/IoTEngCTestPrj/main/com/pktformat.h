@@ -19,8 +19,8 @@
 #define PACKET_FOOTER_LEN    2
 #define PACKET_MAX_LEN       (PAYLOAD_MAX_LEN + PACKET_HEADER_LEN + PACKET_FOOTER_LEN)
 #define PACKET_START         0xAA
-#define PACKET_EOF1         0x0D   //   \r
-#define PACKET_EOF2         0x0A    //  \n
+#define PACKET_EOF1          0x0D   //   \r
+#define PACKET_EOF2          0x0A    //  \n
 
 #define ERR_NO_ERR           0 // No error
 #define ERR_INV_FRAME        1 // invalid frame

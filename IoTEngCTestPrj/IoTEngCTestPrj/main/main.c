@@ -7,6 +7,7 @@
 #include "sdkconfig.h"
 #include "led.h"
 #include "comtest.h"
+#include "cmdhandler.h"
 
 static const char *TAG = "IoTEngCTestPrj";
 static uint8_t s_led_state = 0;
@@ -22,9 +23,11 @@ void app_main(void)
 	//Test_03_fcn_dispacher();
 	/////////////////////////////// Test Communication_onDataReceived Step 1
 	//Test_04_Communication_onDataReceived_s1();
-	//////////////////////////////////////
-	Test_05_Communication_onDataReceived_s2_10_items();
-	//////////////////////////////////////////////
+	////////////////////////////////////// Test Communication_onDataReceived Step 2, 10 item with footer
+	//Test_05_Communication_onDataReceived_s2_10_items(CMD_ID_000);
+	/////////////////////////////////////  Test Communication_onDataReceived Step 3, 20 item with footer and heder
+	Test_05_Communication_onDataReceived_s2_10_items(CMD_ID_001);
+	//////////////////////////////////////////////////
     configure_led();
     while (1) 
     {

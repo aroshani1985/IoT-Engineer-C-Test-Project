@@ -4,7 +4,6 @@
 #include "pktreceive.h"
 #include "encdec.h"
 
-
 // container for each command parameters
 struct command_handle_params cmd_handle_params;
 

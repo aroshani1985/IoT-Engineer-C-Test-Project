@@ -18,7 +18,7 @@
 
 
 #define CMD_ID_000_ITEMS          10
-#define CMD_ID_001_ITEMS          1001
+#define CMD_ID_001_ITEMS          20
 #define CMD_ID_002_ITEMS          1002
 #define CMD_ID_003_ITEMS          1003
 #define CMD_ID_004_ITEMS          1004

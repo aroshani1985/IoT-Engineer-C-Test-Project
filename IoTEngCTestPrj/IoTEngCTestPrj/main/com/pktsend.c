@@ -53,9 +53,9 @@ void Communication_send_Header_Packet(uint16_t CMDIs)
 {
 	uint8_t data_buff[PACKET_HEADER_LEN];
 	//////////////////////////////////
-	data_buff[0] = CMDIs>>8;
-	data_buff[1] = CMDIs;
-	data_buff[2] = PACKET_EOF1;
+	data_buff[0] = PACKET_START;
+	data_buff[1] = CMDIs>>8;
+	data_buff[2] = CMDIs;
 	data_buff[3] = 0; // length of reply is unknown
 
 	////////////////////////////////////
