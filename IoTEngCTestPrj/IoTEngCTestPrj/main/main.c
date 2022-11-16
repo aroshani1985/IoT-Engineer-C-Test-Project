@@ -6,6 +6,7 @@
 #include "led_strip.h"
 #include "sdkconfig.h"
 #include "led.h"
+#include "comtest.h"
 
 static const char *TAG = "IoTEngCTestPrj";
 static uint8_t s_led_state = 0;
@@ -13,6 +14,9 @@ static uint8_t s_led_state = 0;
 
 void app_main(void)
 {
+	//////////////////////test encryption and decription wrapper 
+	Test_01_enc_dec_fcn();
+	/////////////////////////
     configure_led();
     while (1) 
     {
