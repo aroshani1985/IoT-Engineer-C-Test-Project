@@ -30,4 +30,5 @@ struct rec_packet_params
 extern struct rec_packet_params rec_pkt_params;
 ////////////////////////////////////
 int8_t is_pkt_valid();
+void extract_packet_params(uint8_t* packet);
 #endif

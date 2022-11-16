@@ -14,3 +14,13 @@ int8_t is_pkt_valid()
 		
 	return ERR_NO_ERR;
 }
+
+void extract_packet_params(uint8_t* packet)
+{
+	rec_pkt_params.start = packet[0];
+	rec_pkt_params.cmd = packet[1];
+	rec_pkt_params.cmd <<= 8;
+	rec_pkt_params.cmd |= packet[2];
+	rec_pkt_params.len =  packet[3];
+	rec_pkt_params.payloadp = packet + PACKET_HEADER_LEN;
+}

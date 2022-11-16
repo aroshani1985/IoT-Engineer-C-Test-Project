@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include "pktreceive.h"
 #include "pktformat.h"
+#include "encdec.h"
 
 
 struct receive_packet_flags rec_pkt_flags;
@@ -41,8 +42,16 @@ void Communication_onDataReceived(uint8_t* packet, uint16_t lenght)
 		rec_pkt_flags.block_rec = false;   // resume receive.
 		return;
 	}
-	///////////////////////////////////////
-
+	/////////////////////////////////////// decrypt packet 
+	encrypt_decrypt_packet(packet, lenght, _decrypt_buffer, true);
+	/////////////////////////////////////////extract parameters from decrepted packet and parameters validation
+	extract_packet_params(_decrypt_buffer);
+	rec_pkt_flags.err_code = is_pkt_valid();
+	if (rec_pkt_flags.err_code != 0) 
+	{
+		free(_decrypt_buffer);
+		return;
+	}
 	///////////////////////////////////////
 	rec_pkt_flags.status = true;   
 	rec_pkt_flags.block_rec = false; // resume receive.

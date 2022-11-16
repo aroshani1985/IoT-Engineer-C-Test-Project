@@ -16,5 +16,6 @@ extern struct receive_packet_flags rec_pkt_flags;
 
 
 void init_receive_process_flags(bool FreeMemory);
-
+void Communication_onDataReceived(uint8_t* packet, uint16_t lenght);
+void free_receive_resources();
 #endif
