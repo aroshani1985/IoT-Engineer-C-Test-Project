@@ -31,8 +31,6 @@ void  CommandHandler_handle(uint16_t cmdid, uint8_t* payloadp)
 	cmd_process_array[cmdid](NULL, 0, NULL);
 	if (cmd_handle_params.items_count == 0)   // if no item found, return, no need for reply
 		return;
-	////////////////////////////////////////////////////////
-	Communication_openResponse();
 	////////////////////////////////////////////////////
 	uint8_t * _item_responce_buff = malloc(SEND_MAX_BUFF_LEN); 
 	if (_item_responce_buff == NULL) 
@@ -40,6 +38,9 @@ void  CommandHandler_handle(uint16_t cmdid, uint8_t* payloadp)
 		rec_pkt_flags.err_code = ERR_OUT_OF_MEM2;
 		return;
 	}
+	////////////////////////////////////////////////////////
+	Communication_openResponse();
+	Communication_send_Header_Packet(cmdid);
 	///////////////////////////////////////////////////////////
 	for (i = 1; i <= cmd_handle_params.items_count; i++)
 	{

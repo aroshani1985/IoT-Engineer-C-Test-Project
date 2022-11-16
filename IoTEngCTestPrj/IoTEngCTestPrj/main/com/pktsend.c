@@ -49,6 +49,20 @@ void Communication_appendResponse(uint8_t* data, uint16_t  length)
 		data[i] = cmd_handle_params.curr_item;
 }
 
+void Communication_send_Header_Packet(uint16_t CMDIs)
+{
+	uint8_t data_buff[PACKET_HEADER_LEN];
+	//////////////////////////////////
+	data_buff[0] = CMDIs>>8;
+	data_buff[1] = CMDIs;
+	data_buff[2] = PACKET_EOF1;
+	data_buff[3] = 0; // length of reply is unknown
+
+	////////////////////////////////////
+	Communication_sendData(data_buff, PACKET_HEADER_LEN);
+}
+
+
 void Communication_send_EndOfPacket()
 {
 	uint8_t data_buff[PACKET_FOOTER_LEN];
@@ -56,5 +70,5 @@ void Communication_send_EndOfPacket()
 	data_buff[0] = PACKET_EOF1;
 	data_buff[1] = PACKET_EOF2;
 	////////////////////////////////////
-	Communication_sendData(data_buff, 2);
+	Communication_sendData(data_buff, PACKET_FOOTER_LEN);
 }
