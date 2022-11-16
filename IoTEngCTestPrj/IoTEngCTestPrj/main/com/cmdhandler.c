@@ -21,7 +21,7 @@ cmd_process *cmd_process_array[CMD_COUNT] = {
     cmd_009_process
 };
 
-
+// handle command with multiple items in response with limmted send buffer
 void  CommandHandler_handle(uint16_t cmdid, uint8_t* payloadp)
 {
 	int i;
@@ -31,45 +31,45 @@ void  CommandHandler_handle(uint16_t cmdid, uint8_t* payloadp)
 	if (cmd_handle_params.items_count == 0)   // if no item found, return, no need for reply
 		return;
 	////////////////////////////////////////////////////
-	uint8_t * _item_responce_buff = malloc(SEND_MAX_BUFF_LEN); 
+	uint8_t * _item_responce_buff = malloc(SEND_MAX_BUFF_LEN); // allocate memory for response packet
 	if (_item_responce_buff == NULL) 
 	{	
 		rec_pkt_flags.err_code = ERR_OUT_OF_MEM2;
 		return;
 	}
 	////////////////////////////////////////////////////////
-	Communication_openResponse();
-	Communication_send_Header_Packet(cmdid);
-	///////////////////////////////////////////////////////////
+	Communication_openResponse();              //open communication responce, from communication layer
+	Communication_send_Header_Packet(cmdid);   // send packet header
+	/////////////////////////////////////////////////////////// accumulate items data untill limmited buffer size
 	for (i = 1; i <= cmd_handle_params.items_count; i++)
 	{
-		cmd_handle_params.curr_item = i;   
-		cmd_process_array[cmdid](payloadp, i, _item_responce_buff + items_len_accumulator);
-		if (cmd_handle_params.curr_item_length != 0)
+		cmd_handle_params.curr_item = i;   // just for test purposes
+		cmd_process_array[cmdid](payloadp, i, _item_responce_buff + items_len_accumulator); //get each item parameters
+		if (cmd_handle_params.curr_item_length != 0)   // if current item has any data, add data to responce buffer
 		{
 			Communication_appendResponse(_item_responce_buff + items_len_accumulator, cmd_handle_params.curr_item_length);
 		}
-		items_len_accumulator += cmd_handle_params.curr_item_length;
-		
+		items_len_accumulator += cmd_handle_params.curr_item_length; // sum up data length in response buffer
+		// check buffer before overflow
 		if ((((items_len_accumulator + cmd_handle_params.next_item_length) >= SEND_MAX_BUFF_LEN) || (i == cmd_handle_params.items_count)) && (items_len_accumulator!= 0))
 		{
-			uint8_t * _enc_buffer = malloc(items_len_accumulator); 
+			uint8_t * _enc_buffer = malloc(items_len_accumulator); // allocat temporary memory for encryption 
 			if (_enc_buffer == NULL) 
 			{
 				rec_pkt_flags.err_code = ERR_OUT_OF_MEM3;
 				return;
 			}
-			encrypt_decrypt_packet(_item_responce_buff, items_len_accumulator, _enc_buffer, false);
-			Communication_sendData(_enc_buffer, items_len_accumulator);
-			items_len_accumulator = 0;
-			free(_enc_buffer);
+			encrypt_decrypt_packet(_item_responce_buff, items_len_accumulator, _enc_buffer, false); // encrypt response buffer
+			Communication_sendData(_enc_buffer, items_len_accumulator);  // send current section of responce 
+			items_len_accumulator = 0;  // reset accumulator 
+			free(_enc_buffer);          // free temporary memory allocated for encryption 
 		}
 	}
 	/////////////////////////////////////////////
-	Communication_send_EndOfPacket();
+	Communication_send_EndOfPacket();   // send packet footer 
 	///////////////////////////////////////////////////////////////
-	free(_item_responce_buff);	
-	Communication_closeResponse();
+	free(_item_responce_buff);	        // free memory allocated for response buffer 
+	Communication_closeResponse();      // close communication, from communication layer
 }
 
 // implementation of each command process function

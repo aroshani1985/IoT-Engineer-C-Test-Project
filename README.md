@@ -15,7 +15,7 @@ Secure communucation between two node based on request and reply
   2) [encdec.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/encdec.c) files are used for encryption and decription
   3) [pktformat.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/pktformat.c) files are used for packet format definition 
   4) [pktreceive.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/pktreceive.c) files are used for handling received packet
-  5) [cmdhandler.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/cmdhandler.c) files are used for handling large number of commands and dispaching related functions
+  5) [cmdhandler.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/cmdhandler.c) files are used for handling large number of commands with multiple items in responce 
   5) [pktsend.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/pktsend.c) files are used for sending data to the client
   
 

@@ -8,7 +8,7 @@ void encrypt_decrypt_packet(uint8_t* input, uint16_t length, uint8_t* output, bo
 	uint8_t i;
 	uint8_t pkt_full_segments = length / ENC_DEC_BUFF_LIMIT;     //get full segments of 255 bytes
 	uint8_t pkt_last_segment_len = length % ENC_DEC_BUFF_LIMIT;  // get remained bytes
-	
+	//////////////////////////////////////// handle full segments
 	for (i = 0; i < pkt_full_segments; i++)
 	{
 		if (is_decrypt)
@@ -16,6 +16,7 @@ void encrypt_decrypt_packet(uint8_t* input, uint16_t length, uint8_t* output, bo
 		else
 			encrypt(input + i*ENC_DEC_BUFF_LIMIT, ENC_DEC_BUFF_LIMIT, output + i*ENC_DEC_BUFF_LIMIT);
 	}
+	//////////////////////////////////handle remaied segment if exist
 	if (pkt_last_segment_len) 
 	{
 		if (is_decrypt)

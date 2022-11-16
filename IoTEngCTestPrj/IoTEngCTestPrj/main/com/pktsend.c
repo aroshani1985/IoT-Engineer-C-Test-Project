@@ -19,8 +19,8 @@ void Communication_closeResponse()
 void Communication_sendData(uint8_t* data, uint16_t length)
 {
 	int i;
-	int idx = 0;
-	char buff[32];
+	int idx = 0;   // index for collecting data to buffer
+	char buff[32]; // small buffer for print data 
 	////////////////////////////////////
 	for (i = 0; i < length; i++)
 	{
@@ -49,6 +49,7 @@ void Communication_appendResponse(uint8_t* data, uint16_t  length)
 		data[i] = cmd_handle_params.curr_item;
 }
 
+// send protocol header 4 byte in response packet
 void Communication_send_Header_Packet(uint16_t CMDIs)
 {
 	uint8_t data_buff[PACKET_HEADER_LEN];
@@ -62,7 +63,7 @@ void Communication_send_Header_Packet(uint16_t CMDIs)
 	Communication_sendData(data_buff, PACKET_HEADER_LEN);
 }
 
-
+// send protocol footer 2 byte
 void Communication_send_EndOfPacket()
 {
 	uint8_t data_buff[PACKET_FOOTER_LEN];
