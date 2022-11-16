@@ -3,7 +3,7 @@ Secure communucation between two node based on request and reply
 
 # Protocol definition
   1) Frame format: 
-      [Start] [CMD_H]  [CMD_L] [Payload_Len]  [Payload .... ][EoF-1][EoF-2]
+      [**Start**]  [**CMD_H**]  [**CMD_L**]  [**Payload_Len**]  [**Payload ....** ] [**EoF-1**]  [**EoF-2**]
   2) Start byte is 0xAA (one byte)
   3) Command id is two bytes.
   4) Maximum payload is 200 bytes 
