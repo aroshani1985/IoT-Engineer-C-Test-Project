@@ -12,7 +12,7 @@ Secure communucation between two node based on request and reply
 # Protocol implementation files 
   1) path is: [main/com](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/) folder
   2) [encdec.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/encdec.c) files are used for encryption and decription
-  3) [pktformat.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/pktformat.c) files are used packet format definition 
+  3) [pktformat.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/com/pktformat.c) files are used for packet format definition 
   
 
 
