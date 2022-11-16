@@ -23,4 +23,18 @@ Secure communucation between two node based on request and reply
   # Protocol test files 
   1) path is: [main/test](/IoTEngCTestPrj/IoTEngCTestPrj/main/test/) folder
   2) [comtest.c/h](/IoTEngCTestPrj/IoTEngCTestPrj/main/test/comtest.c) files are used for testing communication protocol implemented functions
+
+  # Sample output with 20 items and 3 byte for each item      
+	   Send fcn: Communication_openResponse
+     Send fcn: Send result: AA 00 01 00
+     Send fcn: Send result: A0 01 0A A0 02 0A A0 03 0A A0 04
+     Send fcn: Send result: 0A A0 05 0A A0 06 0A A0 07 0A A0
+     Send fcn: Send result: 08 0A A0 09 0A A0 0A 0A A0 0B 0A
+     Send fcn: Send result: A0 0C 0A A0 0D 0A A0 0E 0A A0 0F
+     Send fcn: Send result: 0A A0 10 0A A0 11 0A A0 12 0A A0
+     Send fcn: Send result: 13 0A A0 14 0A 
+     Send fcn: Send result: 0D 0A 
+     Send fcn: Communication_closeResponse
+     TestComm: CMD[0x0001], ItemCount: 20
+	 
  
