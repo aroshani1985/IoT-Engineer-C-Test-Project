@@ -62,7 +62,7 @@ void  CommandHandler_handle(uint16_t cmdid, uint8_t* payloadp)
 		}
 	}
 	/////////////////////////////////////////////
-	
+	Communication_send_EndOfPacket();
 	///////////////////////////////////////////////////////////////
 	free(_item_responce_buff);	
 	Communication_closeResponse();
